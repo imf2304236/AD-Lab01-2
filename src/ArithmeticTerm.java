@@ -62,11 +62,13 @@ public class ArithmeticTerm {
             try {
                 d = Double.parseDouble(currentToken);
                 stringBuilder.append(currentToken);
+                stringBuilder.append(" ");
             } catch (NumberFormatException e) {
                 if (currentToken.matches("[-+*/%]")) {
                     opStack.push(currentToken);
                 } else if (currentToken.equals(")")) {
                     stringBuilder.append(opStack.pop());
+                    stringBuilder.append(" ");
                 }
             }
         }
