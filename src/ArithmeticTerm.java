@@ -42,6 +42,37 @@ public class ArithmeticTerm {
                 stringBuilder.append(" ");
             }
         }
+    }
+
+    /**
+     * Method to convert the Fully Parenthesized Arithmetic Infix Expression
+     * into a postfix expression with the Infix to Postfix algorithm.
+     * @return String of converted Postfix expression
+     */
+    public String convert() throws NumberFormatException {
+        String postfix;
+        Double d;
+        Stack<String> opStack = new Stack<>();
+        StringTokenizer tokenizer = new StringTokenizer(expression);
+        String currentToken;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        while (tokenizer.hasMoreTokens()) {
+            currentToken = tokenizer.nextToken();
+            try {
+                d = Double.parseDouble(currentToken);
+                stringBuilder.append(currentToken);
+            } catch (NumberFormatException e) {
+                if (currentToken.matches("[-+*/%]")) {
+                    opStack.push(currentToken);
+                } else if (currentToken.equals(")")) {
+                    stringBuilder.append(opStack.pop());
+                }
+            }
+        }
+
+        postfix = stringBuilder.toString();
+        return postfix;
 
     }
 }
